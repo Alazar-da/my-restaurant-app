@@ -4,31 +4,32 @@ import Logo from '../icons_assets/Logo.svg';
  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faYoutube, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 function Footer(){
     return(
         <footer className='footer'>
-        <div>
+        <section>
              <div>
-                 <img className='footer-logo' src={Logo} />
+                 <img className='footer-logo' src={Logo} alt='Logo' />
              </div>
              <div className='navigation'>
                  <h5>Navigation</h5>
                  <ul>
-                     <li><a>Home</a></li>
-                     <li><a>About</a></li>
-                     <li><a>menu</a></li>
-                     <li><a>Reservations</a></li>
-                     <li><a>Order Online</a></li>
-                     <li><a>Login</a></li>
+                 <li className='menu-list' ><Link to='/'>Home</Link></li>
+                    <li><Link to='/'>About</Link></li>
+                    <li><Link to='/'>Menu</Link></li>
+                    <li><Link to='/Booking'>Reservations</Link></li>
+                    <li><Link to='/'>Order online</Link></li>
+                    <li><Link to='/'>Log in</Link></li>
                  </ul>
              </div>
              <div className='contact'>
                  <h5>Contact</h5>
                  <ul>
-                     <li><a>Illino,Chicago</a></li>
-                     <li><a>555-127</a></li>
-                     <li><a>Littlelemon@gmail.com</a></li>
+                     <li>Chicago, Illinois</li>
+                     <li>555-127</li>
+                     <li>Littlelemon@gmail.com</li>
                  </ul>
              </div>
              <div className='social-media'>
@@ -40,7 +41,7 @@ function Footer(){
                      <li><FontAwesomeIcon icon={faYoutube} /></li>
                  </ul>
              </div>
-        </div>
+        </section>
      </footer>
 
 

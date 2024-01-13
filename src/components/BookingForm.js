@@ -4,58 +4,77 @@ import '../styles/style.css';
 
 
 
-const BookingForm=({availableTimes,guest,date,occasion})=> {
 
-    
+const BookingForm=({availableTimes,newDate,submitData})=> {
 
+    const today=new Date().toISOString().split('T')[0];
+    const occasionList=["Birthday","Anniversary"];
 
-  const guestHandler =(e)=>
-    {
-        let guests=e.target.value;
-        guest(guests);
-        /* if(name.length < 4){
-            setFnameErr(true);
-        }
-        else{
-            setFnameErr(false);
-        } */
-    }
-
-    const dateHandler =(e)=>
-    {
-        const newDate= e.target.value;
-        /* if(name.length < 4){
-            setFnameErr(true);
-        }
-        else{
-            setFnameErr(false);
-        } */
-    date(newDate);
-    }
-
-    const occasionHandler =(e)=>
-    {
-        let occasions=e.target.value;
-    occasion(occasions);
-    }
-    /* const timeHandler =(e)=>
-    {
-        let time=e.target.value;
-    props.time(time);
-    } */
-
-    const handleSubmit= (event)=> {
-
-        /* if(date.length<4 || Lname.length<4){
-            alert("invalid Data")
-        }
-        else{
-            alert("all good")
-        } */
-        event.preventDefault()
+    const [time,setTime]=useState("17:00");
+    const [dates,setDate]=useState(today);
+    const [guest,setGuest]=useState(1);
+    const [occasion,setOccasion]=useState(occasionList[0]);
 
 
+  const guestHandler =(e)=>{
+
+    setGuest(e.target.value);
+
+}
+
+    const dateHandler =(e)=>{
+    newDate(e.target.value);
+    setDate(e.target.value);}
+
+    const occasionHandler =(e)=>{setOccasion(e.target.value);}
+
+    const timeHandler =(e)=>{
+        setTime(e.target.value);}
+
+    const handleSubmit= (e)=> {
+        e.preventDefault();
+        submitData({ dates, time, guest, occasion, });
       }
+
+
+      const dateErr=(dates)=>{
+        if(dates==="" || dates<today){
+            return "Please choose a valid date";
+        }
+        return "";
+
+    }
+      const guestErr=(guest)=>{
+        const newGest=parseInt(guest);
+
+        if(!newGest || newGest<1 || newGest>10){
+            return "Please enter a number between 1 and 10";
+        }
+
+        return "";
+      }
+      const timeErr=(time)=>{
+        if(time===""){
+            return "Please choose the time";
+        }
+        return "";
+
+    }
+      const occasionErr=(occasion)=>{
+        if(!occasion ){
+            return "Please choose the occasion";
+        }
+
+        return "";
+      }
+
+       const isDisabled=(dates,guest)=>{
+        if(dateErr(dates)!=="" || guestErr(guest)!=="" || timeErr(time)!=="" || occasionErr(occasion)!=="" ){
+            return true
+        }
+        return false
+      }
+
 
   return (
 
@@ -66,34 +85,49 @@ const BookingForm=({availableTimes,guest,date,occasion})=> {
         <form className="form" onSubmit={handleSubmit}>
         <h3>Reserve yor seats!</h3>
             <div className='form-list'>
-                <div>
-                    <label htmlFor="date">Date</label>
-                    <input type="date" id='date' onChange={dateHandler} required/>
+                <div className='input-main'>
+                    <div>
+                        <label className='input-label' htmlFor="date">Date</label>
+                        <input type="date" id='date' value={dates} min={today} onChange={dateHandler} required/>
+                    </div>
+                    <label className='error-message' data-testid="date-error">{ dateErr(dates) }</label>
                 </div>
-                <div>
-                    <label htmlFor="time">Time</label>
-                    <select id="time" /* onChange={timeHandler} */>
-                        {
-                            availableTimes?.map((Times)=>
-                            <option>{Times}</option>
-                            )
-                        }
-                    </select>
+
+                <div className='input-main'>
+                    <div>
+                        <label className='input-label' htmlFor="time">Time</label>
+                        <select id="time" data-testid="select" value={time}  onChange={timeHandler} required>
+                        {/* <option hidden value="">Time</option> */}
+                            {
+                                availableTimes?.map((Times)=>
+                                <option data-testid="time-option" value={Times} key={Times}>{Times}</option>
+                                )
+                            }
+                        </select>
+                    </div>
+                    <label className='error-message' data-testid="time-error">{ timeErr(time) }</label>
                 </div>
             </div>
             <div className='form-list'>
-                <div>
-                    <label htmlFor="guests">Number of guests</label>
-                    <input type="number" placeholder="1" min="1" max="10" id="guests" onChange={guestHandler} required/>
+                <div className='input-main'>
+                    <div>
+                        <label className='input-label' htmlFor="guests">Number of guests</label>
+                        <input type="number" min={1}  max={10} value={guest} id="guests" onChange={guestHandler} required/>
+                    </div>
+                    <label className='error-message' data-testid="guest-error">{ guestErr(guest) }</label>
                 </div>
-                <div>
-                    <label htmlFor="occation">Occation</label>
-                    <select required onChange={occasionHandler} id='occation'>
-                        <option value={''}>Occasion</option>
-                        <option value={'Birthday'}>Birthday</option>
-                        <option value={'Engagement'}>Engagement</option>
-                        <option value={'Anniversary'}>Anniversary</option>
-                    </select>
+
+                <div className='input-main'>
+                    <div>
+                        <label className='input-label' htmlFor="occasion">Occasion</label>
+                        <select onChange={occasionHandler} id='occasion' required value={occasion}>
+                            {/* <option hidden value="">Occasion</option> */}
+                            {occasionList?.map((items)=>
+                            <option data-testid="occasion-option" value={items} key={items} >{items}</option>
+                            )}
+                        </select>
+                    </div>
+                    <label className='error-message' data-testid="guest-occastion">{ occasionErr(occasion) }</label>
                 </div>
                 {/* <div className="radio">
                     <div>
@@ -107,9 +141,9 @@ const BookingForm=({availableTimes,guest,date,occasion})=> {
                 </div> */}
             </div>
             <div className='form-list'>
-                <div>
-                    <label htmlFor="comments">comments...</label>
-                    <textarea id='comments'></textarea>
+                <div className='input-main'>
+                    <label className='input-label' htmlFor="comments">comments...</label>
+                    <textarea id='comments' placeholder='Optional...' minLength={25} maxLength={100}></textarea>
                 </div>
             </div>
             {/* <div className='info'>
@@ -144,7 +178,7 @@ const BookingForm=({availableTimes,guest,date,occasion})=> {
                 </div>
             </div> */}
             <div className='submit-button-container'>
-                <input type='submit' className='submit-button' value="Make Your reservation" />
+                <button type='submit' className='submit-button' disabled={isDisabled(dates,guest)} aria-label="On Click">Make Your reservation</button>
             {/* <button type='submit' className='submit-button'>Submit</button> */}
             </div>
         </form>

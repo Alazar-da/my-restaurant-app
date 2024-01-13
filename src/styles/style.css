@@ -87,6 +87,7 @@ background-color: #edefee;
     .brand{
         display: grid;
         justify-content: space-between;
+        align-items: center;
         grid-template-columns: auto auto;
         gap: 10px;
         padding: 0 10px;
@@ -110,7 +111,7 @@ background-color: #edefee;
 }
 .hero-info p{
     color: #edefee;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 @media screen and (min-width: 901px) {
@@ -238,7 +239,7 @@ background-color: #edefee;
     width: 100%;
 
 }
-.test{
+.higlight-container{
     display: grid;
     grid-template-columns: 900px;
     grid-auto-rows: minmax(100px, auto);
@@ -302,7 +303,7 @@ background-color: #edefee;
     }
 
 
-    .test{
+    .higlight-container{
         display: grid;
         grid-template-columns: 60%;
         justify-content:center;
@@ -361,7 +362,7 @@ background-color: #edefee;
     gap: 10px;
 }
 
-.highlight-desc div a{
+.highlight-desc div i{
     float: right;
     height: 28px;
     width: 28px;
@@ -391,7 +392,7 @@ background-color: #edefee;
 @media screen and (min-width: 1008px) {
     .testimonials{
     display: grid;
-    grid-template-columns: repeat(4, 300px);
+    grid-template-columns: repeat(4, 22%);
     justify-content: center;
     gap: 10px;
 }
@@ -597,21 +598,6 @@ background-color: #edefee;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* FOOTER */
 
 .footer{
@@ -626,6 +612,10 @@ background-color: #edefee;
 }
 .navigation a, .contact a{
  font-size: 15px;
+}
+.footer ul li a{
+    text-decoration: none;
+    color: black;
 }
 .navigation li, .contact li{
     padding: 2px 0;
@@ -658,7 +648,7 @@ background-color: #edefee;
     justify-content: center;
     align-items: center;
     }
-    .footer > div {
+    .footer section {
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
     justify-content: center;
@@ -672,9 +662,9 @@ background-color: #edefee;
 }
 
 @media screen and (max-width: 640px) {
-    .footer > div {
+    .footer section {
     display: grid;
-    grid-template-columns: 40% 40%;
+    grid-template-columns: auto auto;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -694,7 +684,8 @@ background-color: #edefee;
 }
 .form h3{
     text-align: center;
-    color: #EE9972;
+    color: #f4ce14;
+    font-weight: bold;
     font-size: 24px;
 }
 
@@ -712,6 +703,7 @@ input[type=text],input[type=email],input[type=number],input[type=time],input[typ
     border: 0.5px solid #495f58;
     border-radius: 5px;
     width: 100%;
+    margin-top: 5px;
   }
 .submit-button-container{
 display: grid;
@@ -739,6 +731,10 @@ select{
     border-radius: 5px;
     width: 100%;
   }
+  .input-label{
+    font-size: 14px;
+    color: #495f58;
+  }
 
 @media screen and (min-width: 1008px) {
     .main-container-form{
@@ -763,7 +759,7 @@ justify-content: center;
     justify-content: space-evenly;
     padding: 10px 0;
     }
-    .form-list div{
+    .input-main div{
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
@@ -792,7 +788,7 @@ justify-content: center;
     justify-content: space-evenly;
     padding: 10px 0;
     }
-    .form-list div{
+    .input-main div{
         display: grid;
         grid-template-columns: auto auto;
         justify-content: start;
@@ -814,16 +810,17 @@ grid-template-columns: 100%;
 }
 .form-list{
     display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
-    padding: 10px 0;
+    grid-template-columns: 50% 50%;
+    justify-content: start;
+    padding: 10px;
     gap: 10px;
     }
-    .form-list div{
+    .input-main div{
         display: grid;
         grid-template-columns: auto;
         justify-content: start;
         gap: 5px;
+        margin-bottom: 10px;
     }
 
 }
@@ -833,3 +830,30 @@ grid-template-columns: 100%;
     gap:20px;
 }
 
+/*error message*/
+.error-message {
+    font-size: 14px;
+    font-weight: 500;
+    color: #EE9972;
+}
+
+
+/*confirmedBooking*/
+.confirmed-header{
+text-align: center;
+font-size: 18px;
+color: #495f58;
+}
+.confirmed-button-container{
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+}
+.confirmed-button{
+    width: 160px;
+    height: 35px;
+    background-color: #f4ce14;
+    border: #f4ce14;
+    border-radius: 16px;
+    font-size: 15px;
+}

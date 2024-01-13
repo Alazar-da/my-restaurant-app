@@ -38,7 +38,7 @@ function Testimonials(){
         let rating = [];
         let i=0;
         while (i < stars) {
-            rating.push(<li>
+            rating.push(<li key={i}>
                 { <FontAwesomeIcon icon={faStar}/> }
             </li>
                 );
@@ -57,7 +57,7 @@ function Testimonials(){
                     }
                     </ul>
                 <span>
-                    <img src={testimonials.image} alt='Customer Image' />
+                    <img src={testimonials.image} alt='Customer' />
                     <h6>{testimonials.name}</h6>
                 </span>
                 <p>{testimonials.Comment}</p>

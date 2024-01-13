@@ -29,7 +29,7 @@ function Highlights(props){
     ];
     return(
         <section className="higlight-main">
-            <div className='test'>
+            <article className='higlight-container'>
                 <div className='higlight-header'>
                     <div>
                         <h2 className='special'>This week special!</h2>
@@ -38,19 +38,19 @@ function Highlights(props){
                         <button className='higlight-button'>Order online</button>
                     </div>
                 </div>
-            </div>
-           <div className="higlight">
+            </article>
+           <article className="higlight">
            {special.map((special)=>
                <div className='highlight-list'>
-                    <img className='highlight-img' src={special.image}/>
+                    <img className='highlight-img' src={special.image} alt='special imgage'/>
                     <div className='highlight-desc'>
                         <h2>{special.name}</h2>
                         <h4>{special.price}</h4>
                         <p>{special.description}</p>
-                        <div><h5>Order a delivery</h5><a><FontAwesomeIcon icon={faMotorcycle} /></a></div>
+                        <div><h5>Order a delivery</h5><i><FontAwesomeIcon icon={faMotorcycle} /></i></div>
                     </div>
                 </div>)}
-            </div>
+            </article>
         </section>
     );
 }

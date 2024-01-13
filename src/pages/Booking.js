@@ -1,45 +1,41 @@
-import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import BookingForm from '../components/BookingForm';
 import '../styles/style.css';
-import { useState,useEffect,useReducer } from 'react';
+import {useReducer } from 'react';
 import {fetchAPI,submitAPI} from '../API/fakeAPI';
+import { useNavigate } from 'react-router-dom';
 
+
+const updateTimes = (availableTimes, date) => {
+  const response = fetchAPI(new Date(date));
+  return (response.length !== 0) ? response : availableTimes;
+};
+
+
+const initializeTimes = initialAvailableTimes =>
+[...initialAvailableTimes, ...fetchAPI(new Date())];
 
 function Booking() {
 
-  const [time, setTime] = useState("");
-  const [occasion, setOccastion] = useState("");
-  const [guests, setGuests] = useState("");
-  const [comment, setComment] = useState("");
-
-  const getGuest =(guest)=>{setGuests(guest);}
 
 
-    const getOccasion =(occasion)=>{setOccastion(occasion);}
+    const [availableTimes, dates] = useReducer(updateTimes, [], initializeTimes);
+    const navigate = useNavigate();
 
-    const updateTimes = (availableTimes, date) => {
-      const response = fetchAPI(new Date(date));
-      return (response.length !== 0) ? response : availableTimes;
-    };
-
-
-    const initializeTimes = initialAvailableTimes =>
-    [...initialAvailableTimes, ...fetchAPI(new Date())];
-    const [availableTimes, date] = useReducer(updateTimes, [], initializeTimes);
-
-
-
-
-
-
+const submitData = submitData => {
+  if (submitAPI(submitData))
+  { navigate('/ConfirmedBooking');}
+}
 
 
 
       return (
     <>
+    <header>
+    {/* <Nav /> */}
+    </header>
         <main className='main-container-form'>
-            <BookingForm date={date} guest={getGuest} occasion={getOccasion}  availableTimes={availableTimes}/>
+            <BookingForm availableTimes={availableTimes} newDate={dates} submitData={submitData} />
         </main>
 
         <footer>

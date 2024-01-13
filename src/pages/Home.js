@@ -1,4 +1,4 @@
-import Nav from '../components/Nav';
+
 import Hero from '../components/Hero';
 import Highlights from '../components/Highlights';
 import Testimonials from '../components/Testimonial';
