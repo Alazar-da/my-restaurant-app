@@ -42,7 +42,7 @@ function Highlights(props){
            <article className="higlight">
            {special.map((special)=>
                <div className='highlight-list'>
-                    <img className='highlight-img' src={special.image} alt='special imgage'/>
+                    <img className='highlight-img' src={special.image} alt='special images'/>
                     <div className='highlight-desc'>
                         <h2>{special.name}</h2>
                         <h4>{special.price}</h4>
